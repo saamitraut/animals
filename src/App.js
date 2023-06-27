@@ -12,19 +12,27 @@ function App() {
   const [animals, setAnimals] = useState([]);
 
   const handleClick = () => {
-    setAnimals([...animals, getRandomAnimal()]);
+     const newAnimal = getRandomAnimal();
+  
+     if (!animals.includes(newAnimal)) {
+       setAnimals([...animals, newAnimal]);
+     }
   };
 
   const renderedAnimals = animals.map((animal, index) => {
-    return <AnimalShow key={index} type={animal} />;
+    return <AnimalShow key={index} type={animal} values0={index} setAnimals={setAnimals} />;
   });
 
   return (
     <div className="app">
+      <h1>TOTEL NO OF ANIMAL ADD :- {animals.length}</h1>
+    {animals.length <5 ?
       <button onClick={handleClick}>Add Animal</button>
-      <label>Total Animals Added:{animals.length}</label>
+      :
+      <button onClick={()=>alert('not more then 5')}>Add Animal</button>
+      }
       <div className="animal-list">{renderedAnimals}</div>
-       
+      <button onClick={()=>setAnimals([])}>clear</button>
     </div>
   );
 }

@@ -17,22 +17,21 @@ const svgMap = {
   horse,
 };
 
-function AnimalShow({ type }) {
+function AnimalShow({ type,values0,setAnimals }) {
   const [clicks, setClicks] = useState(0);
 
   const handleClick = () => {
-    setClicks(clicks + 1);
+    setAnimals((animal) => animal.filter((_, index) => index !== values0));
   };
 
+
   return (
-    <div className="animal-show" onClick={handleClick}>
-      <img className="animal" alt="animal" src={svgMap[type]} />
-      <img
-        className="heart"
-        alt="heart"
-        src={heart}
-        style={{ width: 10 + 10 * clicks + 'px' }}
-      />
+    <div className="animal-show" >
+      <img className="animal" alt="animal" src={svgMap[type]} onClick={handleClick} />
+      <p>{clicks}</p>
+      <img height={20} src={heart} onClick={()=>setClicks(clicks+1)} />
+     
+   
     </div>
   );
 }
